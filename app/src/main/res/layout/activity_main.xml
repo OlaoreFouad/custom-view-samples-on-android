@@ -6,10 +6,7 @@
   android:layout_height="match_parent"
   tools:context=".MainActivity">
 
-  <dev.olaore.customviewsamplesonandroid.views.ShapeSetView
+  <dev.olaore.customviewsamplesonandroid.views.ChartView
 	  android:layout_width="match_parent"
-	  app:layout_constraintTop_toTopOf="parent"
-	  android:id="@+id/shapeSetId"
-	  android:layout_height="500dp"/>
-
+	  android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
