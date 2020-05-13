@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import dev.olaore.customviewsamplesonandroid.R
 
@@ -21,6 +22,9 @@ class ChartView @JvmOverloads
     private var crossLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.BLACK }
     private var mainLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.DKGRAY }
     private var barPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.RED }
+
+//    constants
+    private val TAG = ChartView::class.java.simpleName
 
 //    dimensions
     private var extraPadding = 10
@@ -62,6 +66,7 @@ class ChartView @JvmOverloads
         drawCrossLine(canvas)
         drawBottomLine(canvas)
         drawMainLines(canvas)
+        drawBars(canvas)
     }
 
     private fun drawCrossLine(canvas: Canvas?) {
@@ -104,6 +109,42 @@ class ChartView @JvmOverloads
 
                 startingPointY += spacing
             }
+
+        }
+
+    }
+
+    private fun drawBars(canvas: Canvas?) {
+
+        barWidth = ((width - paddingLeft - paddingRight) / data.size).toFloat() - (spacing * 2)
+        Log.d(TAG, "Bar Width: $barWidth, Data: ${ data.size }, Spacing: $spacing")
+
+        canvas?.let {
+
+            var saveCount = it.save()
+            data.forEachIndexed { index, number ->
+
+                val barValue = (number.toFloat() / 100f) * (height - paddingTop - paddingBottom)
+                val startY = height - paddingTop - paddingBottom - barValue
+                Log.d(TAG, "number: $number, bar value: $barValue, height: $height, startY: $startY")
+
+                var startX = 0f
+
+                if (index == 0) {
+                    startX = (paddingLeft + 10 + spacing) + spacing
+                    it.translate(startX, startY.toFloat())
+
+                    Log.d(TAG, "paddingTop: $paddingTop, paddingBottom: $paddingBottom")
+                    it.drawRect(0f, 0f, barWidth, barValue, barPaint)
+                } else {
+                    it.translate(spacing, startY)
+                    it.drawRect(0f, 0f, barWidth, barValue, barPaint)
+                }
+
+                it.translate(spacing, 0f)
+
+            }
+            it.restoreToCount(saveCount)
 
         }
 
