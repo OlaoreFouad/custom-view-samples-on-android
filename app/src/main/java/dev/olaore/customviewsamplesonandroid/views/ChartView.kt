@@ -41,7 +41,7 @@ class ChartView @JvmOverloads
     private var crossEndY = 0
 
 //    data
-    private var data = listOf(10, 20, 30, 40, 50)
+    private var data = listOf(10, 20, 30, 40, 50, 60, 70, 70, 60, 80, 90)
 
     init {
         refreshValues()
@@ -49,7 +49,7 @@ class ChartView @JvmOverloads
 
     private fun refreshValues() {
         setPadding(extraPadding, extraPadding, extraPadding, extraPadding)
-        spacing = 5f
+        spacing = 10f
         barWidth = ((width - paddingLeft - paddingRight) / data.size).toFloat() - (spacing * 2)
 
         totalWidth = width + (extraPadding * 2).toFloat()
@@ -132,16 +132,18 @@ class ChartView @JvmOverloads
 
                 if (index == 0) {
                     startX = (paddingLeft + 10 + spacing) + spacing
-                    it.translate(startX, startY.toFloat())
+                    it.translate(startX, startY)
 
                     Log.d(TAG, "paddingTop: $paddingTop, paddingBottom: $paddingBottom")
                     it.drawRect(0f, 0f, barWidth, barValue, barPaint)
                 } else {
-                    it.translate(spacing, startY)
+                    startX = (paddingLeft + 10 + (barWidth * index) + (spacing * (index + 1))) + spacing
+                    it.translate(startX, startY)
+
                     it.drawRect(0f, 0f, barWidth, barValue, barPaint)
                 }
 
-                it.translate(spacing, 0f)
+                it.translate(-startX, -startY)
 
             }
             it.restoreToCount(saveCount)
