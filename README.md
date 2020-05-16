@@ -16,4 +16,4 @@ variable data.
 I created a paint object and drew the x and y axes with the appropriate colors, after that I divided the height of the screen by 10, so
 as to know the exact spacing needed between the graph lines. Then I divided the width of the screen minus the padding, the width of the
 left axis, and the default spacing by the amount of bars to be drawn. I then calculate by the percent of the bar, the height of the bar is
-deduced. You can go through the code <a href="">here</a>
+deduced. You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/ChartView.kt">here</a>
