@@ -41,7 +41,7 @@ class ChartView @JvmOverloads
     private var crossEndY = 0
 
 //    data
-    private var data = listOf(10, 20, 30, 40, 50, 60, 70, 70, 60, 80, 90)
+    private var data = listOf(10, 20, 30, 40, 50)
 
     init {
         refreshValues()

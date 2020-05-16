@@ -96,7 +96,7 @@ class ShapeSetView @JvmOverloads
         imageX = (width - mImage.width) / 2f
         imageY = (height - mImage.height) / 2f
 
-        drawImage(canvas)
+//        drawImage(canvas)
     }
 
     private fun preComputeValues() {
