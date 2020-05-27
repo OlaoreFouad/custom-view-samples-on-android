@@ -23,6 +23,7 @@ class MyTextView @JvmOverloads
     var textPaint = Paint().apply {
         textAlign = Paint.Align.CENTER
         textSize = toDp(textSize).toFloat()
+        textSkewX = 1f
         color = Color.RED
         isAntiAlias = true
     }
@@ -30,7 +31,7 @@ class MyTextView @JvmOverloads
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        canvas.drawText(text, 20f, 20f, textPaint)
+        canvas.drawText(text, (width / 2).toFloat(), (height / 2).toFloat(), textPaint)
 
     }
 
