@@ -1,3 +1,8 @@
 <resources>
   <string name="app_name">Custom View Samples On Android</string>
+    <string name="enter_text_to_draw">Enter text to draw</string>
+  <string name="scalex">ScaleX</string>
+  <string name="size_text">Size</string>
+  <string name="skew">Skew</string>
+  <string name="spacing">Spacing</string>
 </resources>
