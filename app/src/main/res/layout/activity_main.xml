@@ -24,6 +24,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/seekbar_attrs"
         app:layout_constraintTop_toBottomOf="@id/text_to_draw">
 
         <LinearLayout
@@ -95,6 +96,19 @@
 				android:layout_width="100dp"
 				android:id="@+id/spacing_seek_bar"
 				android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
 
         </LinearLayout>
 
