@@ -1,10 +1,7 @@
 package dev.olaore.customviewsamplesonandroid.views
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.util.AttributeSet
@@ -21,10 +18,14 @@ class MyTextView @JvmOverloads
     : View(ctx, attributeSet, defStyleAttr) {
 
 //    text variables and paint
-    var myTextSize = 30f
-    var text = "Drawing Text"
+    private var myTextSize = 30f
+    private var align = Paint.Align.CENTER
+
+    private var fillStyle = Paint.Style.FILL
+
+    private var text = "Sample Text"
     var textPaint = Paint().apply {
-        textAlign = Paint.Align.CENTER
+        textAlign = this@MyTextView.align
         textSize = toDp(myTextSize).toFloat()
         color = Color.BLACK
         isAntiAlias = true
@@ -63,7 +64,23 @@ class MyTextView @JvmOverloads
         textPaint.getTextBounds(text, 0, text.length, textBounds)
         var textHeight = textBounds.height()
         var textWidth = textBounds.width()
-        canvas.drawText(text, (width / 2).toFloat(), (height / 2).toFloat(), textPaint)
+
+        var textX = textHeight
+        var textY = textWidth
+
+        if (this.align == Paint.Align.CENTER) {
+            textX = (width / 2)
+            textY = (height / 2)
+        } else if (this.align == Paint.Align.LEFT) {
+            textY = (height / 2)
+            textX = textWidth + 10
+        } else if (this.align == Paint.Align.RIGHT) {
+            textY = (height / 2)
+            textX = width - textWidth
+        }
+
+        canvas.drawText(text, textX.toFloat(), textY.toFloat(), textPaint)
+
     }
 
     private fun drawLines(canvas: Canvas) {
@@ -89,5 +106,56 @@ class MyTextView @JvmOverloads
             value,
             resources.displayMetrics
         ).toInt()
+    }
+
+    fun setViewText(newText: String) {
+        this.text = newText
+        invalidate()
+    }
+
+    fun setViewScaleX(scaleX: Int) {
+        textPaint.textScaleX = scaleX.toFloat()
+        invalidate()
+    }
+
+    fun setViewSpacing(spacing: Int) {
+        textPaint.letterSpacing = spacing.toFloat()
+        invalidate()
+    }
+
+    fun setViewSkew(skew: Int) {
+        textPaint.textSkewX = skew.toFloat()
+        invalidate()
+    }
+
+    fun setViewSize(size: Int) {
+        textPaint.textSize = toDp(size.toFloat()).toFloat()
+        invalidate()
+    }
+
+    fun setAlignment(position: Int) {
+        when (position) {
+            0 -> {
+                align = Paint.Align.CENTER
+            }
+            1 -> {
+                align = Paint.Align.LEFT
+            }
+            2 -> {
+                align = Paint.Align.RIGHT
+            }
+        }
+
+        invalidate()
+    }
+
+    fun setViewTextStyle(fillStyle: Paint.Style) {
+        textPaint.style = fillStyle
+        invalidate()
+    }
+
+    fun setViewTypeface(typeface: Typeface) {
+        textPaint.typeface = typeface
+        invalidate()
     }
 }

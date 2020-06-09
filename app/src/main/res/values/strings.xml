@@ -5,4 +5,24 @@
   <string name="size_text">Size</string>
   <string name="skew">Skew</string>
   <string name="spacing">Spacing</string>
+    <string name="text_alignment">Text Alignment</string>
+  <string name="center_text">Center</string>
+  <string name="fill_and_stroke_text">Fill and Stroke</string>
+  <string name="stroke_text">Stroke</string>
+  <string name="fill_text">Fill</string>
+  <string name="right_text">Right</string>
+  <string name="left_text">Left</string>
+    <string name="default_text">Default</string>
+  <string name="default_bold_text">Default Bold</string>
+  <string name="sans_serif_text">Sans Serif</string>
+  <string name="serif_text">Serif</string>
+  <string name="monospace_text">Monospace</string>
+  <string name="custom_text">Custom Font</string>
+  <string name="typeface">Typeface</string>
+  <string name="font_styles_text">Font Styles</string>
+  <string name="anti_alias">Anti Alias</string>
+    <string name="bold">Bold</string>
+  <string name="underline_text">Underline</string>
+  <string name="strikethrough_text">Strikethrough</string>
+    <string name="text_style">Text Style</string>
 </resources>
