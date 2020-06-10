@@ -158,4 +158,20 @@ class MyTextView @JvmOverloads
         textPaint.typeface = typeface
         invalidate()
     }
+
+    fun setFontViewStyle(position: Int, value: Boolean) {
+        when (position) {
+            0 -> {
+                textPaint.isFakeBoldText = value
+            }
+            1 -> {
+                textPaint.isUnderlineText = value
+            }
+            2 -> {
+                textPaint.isStrikeThruText = value
+            }
+        }
+
+        invalidate()
+    }
 }

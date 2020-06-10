@@ -105,8 +105,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.monospace_typeface -> my_text_view.setViewTypeface(Typeface.MONOSPACE)
                 R.id.sans_serif_typeface -> my_text_view.setViewTypeface(Typeface.SANS_SERIF)
                 R.id.serif_typeface -> my_text_view.setViewTypeface(Typeface.SERIF)
-                R.id.custom_typeface -> my_text_view.setViewTypeface(Typeface.createFromAsset(baseContext.assets, "font/raleway.ttf"))
+                R.id.custom_typeface -> my_text_view.setViewTypeface(Typeface.createFromAsset(baseContext.assets, "fonts/raleway.ttf"))
             }
+        }
+
+        bold_switch.setOnCheckedChangeListener { _ , b ->
+            my_text_view.setFontViewStyle(0, b)
+        }
+
+        underline.setOnCheckedChangeListener { _ , b ->
+            my_text_view.setFontViewStyle(1, b)
+        }
+
+        strikethrough_switch.setOnCheckedChangeListener { _ , b ->
+            my_text_view.setFontViewStyle(2, b)
         }
 
     }
