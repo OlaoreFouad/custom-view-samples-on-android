@@ -17,3 +17,11 @@ I created a paint object and drew the x and y axes with the appropriate colors, 
 as to know the exact spacing needed between the graph lines. Then I divided the width of the screen minus the padding, the width of the
 left axis, and the default spacing by the amount of bars to be drawn. I then calculate by the percent of the bar, the height of the bar is
 deduced. You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/ChartView.kt">here</a>
+
+## MyTextView
+
+  After spending some time with drawing text on android, it was amazing!, I could easily control how text was being drawn on the Android
+canvas, make modifications and style the text to suit my needs. I learnt how to do various things like alter scale, spacing, size, font
+and among many others, this is is sample application I built that showcases most of the aforementioned sugar do-able with text drawing on canvas
+
+<img src="views/linkedin_post_custom_views_text_actual.gif" width="250"/>
