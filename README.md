@@ -25,3 +25,5 @@ canvas, make modifications and style the text to suit my needs. I learnt how to 
 and among many others, this is is sample application I built that showcases most of the aforementioned sugar do-able with text drawing on canvas
 
 <img src="views/linkedin_post_custom_views_text_actual.gif" width="250"/>
+
+You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/MyTextView.kt">here</a>
