@@ -14,8 +14,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+}
 
-        text_to_draw.addTextChangedListener(object : TextWatcher {
+/*
+* text_to_draw.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 var text = p0.toString()
                 my_text_view.setViewText(text)
@@ -122,4 +125,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-}
+* */
