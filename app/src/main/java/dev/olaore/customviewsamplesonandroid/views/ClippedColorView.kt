@@ -40,7 +40,7 @@ class ClippedColorView @JvmOverloads
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-//        drawRect(canvas)
+        drawRect(canvas)
         drawPath(canvas)
     }
 
@@ -48,7 +48,7 @@ class ClippedColorView @JvmOverloads
         colorRect = Rect(
             0, 0, width, (heightPct * height).toInt()
         )
-        colorPaint.color = this.color
+        colorPaint.color = Color.WHITE
         canvas?.drawRect(colorRect!!, colorPaint)
     }
 
@@ -61,15 +61,14 @@ class ClippedColorView @JvmOverloads
         colorPath.quadTo((0.5 * width).toFloat(), (0.7 * height).toFloat(), (0.75 * width).toFloat(), (0.5 * height).toFloat())
         colorPath.lineTo((0.75 * width).toFloat(), 0f)
 
-        colorPaint.color = Color.BLACK
+        colorPaint.color = this.color
+        colorPaint.style = Paint.Style.FILL
         colorPaint.strokeWidth = 4f
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             canvas?.clipPath(colorPath)
-            canvas?.drawColor(Color.RED)
         } else {
             canvas?.clipOutPath(colorPath)
-            canvas?.drawColor(Color.RED)
         }
 
 //        colorPaint.style = Paint.Style.STROKE
