@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import dev.olaore.customviewsamplesonandroid.R
 import java.util.*
@@ -42,6 +43,15 @@ class RepeatedRectView @JvmOverloads
         val randomNumber = Random().nextInt(colors.size)
         rectPaint.color = colors[randomNumber]
         canvas?.drawRect(0f, 0f, rectWidth, rectHeight, rectPaint)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when (event?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                invalidate()
+            }
+        }
+        return super.onTouchEvent(event)
     }
 
 }
