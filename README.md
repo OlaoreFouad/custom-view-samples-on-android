@@ -27,3 +27,11 @@ and among many others, this is is sample application I built that showcases most
 <img src="views/linkedin_post_custom_views_text_actual.gif" width="250"/>
 
 You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/MyTextView.kt">here</a>
+
+## RepeatedRectView
+
+  I've had this idea of creating a pattern by repeating rectangles on a canvas by moving its origin by a certain inset value. I had to get half of the width of the screen, so as to know how many rectangles it could accomodate, depending on the spacing provided (10). That's what I did here. I started drawing at the origin, then moved in by 10 on both axes, then moved inside again and again until the threshold was met. And voila!, this beauty came out!. I also added a touchevent listener that redraws the views on-click.
+
+<img src="views/repeated_rects.gif" width="250"/>
+
+You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/RepeatedRectView.kt">here</a>
