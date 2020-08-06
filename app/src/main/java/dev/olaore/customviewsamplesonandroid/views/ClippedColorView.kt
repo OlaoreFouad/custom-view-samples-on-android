@@ -21,8 +21,10 @@ class ClippedColorView @JvmOverloads
     private var colorRect: Rect? = null
     private var heightPct = 0.7
 
+
 //    path variables
     private var colorPath = Path()
+    private var pathImage = BitmapFactory.decodeResource(resources, R.drawable.image)
 
 //    text variables
     private var clippedColorViewTextColor = Color.WHITE
@@ -32,6 +34,7 @@ class ClippedColorView @JvmOverloads
     private var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
         textSize = headingTextSize
         color = clippedColorViewTextColor
+        textAlign = Paint.Align.CENTER
     }
 
     init {
@@ -42,7 +45,9 @@ class ClippedColorView @JvmOverloads
 
         drawPath()
         canvas?.clipPath(colorPath)
-        canvas?.drawColor(Color.RED)
+        canvas?.drawBitmap(pathImage, 0f, 0f, Paint(Paint.ANTI_ALIAS_FLAG)) // uncomment this line to draw bitmap after resizing.
+        drawHeadingText(canvas)
+        drawSubheadingText(canvas)
     }
 
     private fun drawRect(canvas: Canvas?) {
@@ -51,6 +56,18 @@ class ClippedColorView @JvmOverloads
         )
         colorPaint.color = Color.WHITE
         canvas?.drawRect(colorRect!!, colorPaint)
+    }
+
+    private fun drawHeadingText(canvas: Canvas?) {
+        textPaint.textSize = headingTextSize
+        textPaint.textAlign = Paint.Align.CENTER
+        canvas?.drawText("Instagram", (width.div(2).toFloat()), (height.div(2).toFloat()), textPaint)
+    }
+
+    private fun drawSubheadingText(canvas: Canvas?) {
+        textPaint.textSize = subHeadingTextSize
+        textPaint.textAlign = Paint.Align.CENTER
+        canvas?.drawText("Rotimi", (width.div(2).toFloat()), (height.div(2).toFloat()) + headingTextSize, textPaint)
     }
 
     private fun drawPath() {
