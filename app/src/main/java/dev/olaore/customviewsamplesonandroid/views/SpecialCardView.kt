@@ -5,6 +5,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -88,8 +89,16 @@ class SpecialCardView @JvmOverloads
 
     private fun drawSecondaryText(canvas: Canvas?) {
         canvas?.let {
-//            it.translate(30f, 120f)
-            it.drawText(secondaryText, 0, secondaryText.length, 100f, 50f, secondaryTextPaint)
+            secondaryTextPaint.getTextBounds(secondaryText, 0, secondaryText.length, placeholderRect)
+            Log.d("SpecialCardView", "Rect Height: ${ placeholderRect.height() }, Rect Width: ${ placeholderRect.width() }")
+            it.drawText(
+                secondaryText,
+                0,
+                secondaryText.length,
+                (placeholderRect.width() + (viewWidth - 20f - 20f - 80f).toInt()).toFloat(),
+                placeholderRect.height() + 120f,
+                secondaryTextPaint
+            )
         }
     }
 
