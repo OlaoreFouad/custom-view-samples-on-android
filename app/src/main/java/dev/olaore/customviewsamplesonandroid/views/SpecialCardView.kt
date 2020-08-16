@@ -25,6 +25,13 @@ class SpecialCardView @JvmOverloads
     private var imageResourceUri = R.drawable.ic_check_circle_black_24dp
     private lateinit var imageDrawable: Drawable
 
+    //    metric values
+    private var mediumTextSize = toDP(15f)
+    private var bigTextSize = toDP(40f)
+    private var secondaryTextSize = toDP(25f)
+    private var rectWidth = 0f
+    private var rectHeight = 0f
+
 //    paint objects
     private var cardPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = cardColor }
     private var primaryTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = primaryTextColor }
@@ -34,13 +41,6 @@ class SpecialCardView @JvmOverloads
         textSize = secondaryTextSize
     }
     private var drawablePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-
-//    metric values
-    private var mediumTextSize = toDP(15f)
-    private var bigTextSize = toDP(40f)
-    private var secondaryTextSize = toDP(20f)
-    private var rectWidth = 0f
-    private var rectHeight = 0f
 
 //    text content
     private var secondaryText = "Ayetoro Town"
@@ -55,6 +55,7 @@ class SpecialCardView @JvmOverloads
 
     init {
         preComputeValues()
+        elevation = 10f
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -95,7 +96,7 @@ class SpecialCardView @JvmOverloads
                 secondaryText,
                 0,
                 secondaryText.length,
-                (placeholderRect.width() + (viewWidth - 20f - 20f - 80f).toInt()).toFloat(),
+                (viewWidth - 20f - 20f).toInt().toFloat(),
                 placeholderRect.height() + 120f,
                 secondaryTextPaint
             )
