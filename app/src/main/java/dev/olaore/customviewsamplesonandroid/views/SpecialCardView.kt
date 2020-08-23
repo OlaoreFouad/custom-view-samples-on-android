@@ -34,7 +34,16 @@ class SpecialCardView @JvmOverloads
 
 //    paint objects
     private var cardPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = cardColor }
-    private var primaryTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = primaryTextColor }
+    private var primaryTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = primaryTextColor
+        textAlign = Paint.Align.LEFT
+        textSize = mediumTextSize
+    }
+    private var bigTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = primaryTextColor
+        textAlign = Paint.Align.RIGHT
+        textSize = bigTextSize
+    }
     private var secondaryTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = secondaryTextColor
         textAlign = Paint.Align.RIGHT
@@ -53,6 +62,8 @@ class SpecialCardView @JvmOverloads
     private var viewHeight = 0
     private var viewWidth = 0
 
+    private var lastHeight = 0
+
     init {
         preComputeValues()
         elevation = 10f
@@ -63,6 +74,12 @@ class SpecialCardView @JvmOverloads
         drawCard(canvas)
         drawImage(canvas)
         drawSecondaryText(canvas)
+        drawDetailsText(canvas, primaryTextOne, 0)
+        drawDetailsText(canvas, primaryTextTwo, placeholderRect.height())
+
+        lastHeight = placeholderRect.height()
+        drawBigDetailsText(canvas, primaryTextThree, lastHeight)
+
     }
 
     private fun drawCard(canvas: Canvas?) {
@@ -91,7 +108,6 @@ class SpecialCardView @JvmOverloads
     private fun drawSecondaryText(canvas: Canvas?) {
         canvas?.let {
             secondaryTextPaint.getTextBounds(secondaryText, 0, secondaryText.length, placeholderRect)
-            Log.d("SpecialCardView", "Rect Height: ${ placeholderRect.height() }, Rect Width: ${ placeholderRect.width() }")
             it.drawText(
                 secondaryText,
                 0,
@@ -99,6 +115,34 @@ class SpecialCardView @JvmOverloads
                 (viewWidth - 20f - 20f).toInt().toFloat(),
                 placeholderRect.height() + 120f,
                 secondaryTextPaint
+            )
+        }
+    }
+
+    private fun drawDetailsText(canvas: Canvas?, text: String, fromTop: Int) {
+        canvas?.let {
+            primaryTextPaint.getTextBounds(text, 0, text.length, placeholderRect)
+            it.drawText(
+                text,
+                0,
+                text.length,
+                40f,
+                placeholderRect.height() + 120f + mediumTextSize + 20f + fromTop.toFloat(),
+                primaryTextPaint
+            )
+        }
+    }
+
+    private fun drawBigDetailsText(canvas: Canvas?, text: String, fromTop: Int) {
+        canvas?.let {
+            bigTextPaint.getTextBounds(text, 0, text.length, placeholderRect)
+            it.drawText(
+                text,
+                0,
+                text.length,
+                (40f + placeholderRect.width()).toFloat(),
+                placeholderRect.height() + 120f + bigTextSize + 20f + fromTop.toFloat(),
+                bigTextPaint
             )
         }
     }
