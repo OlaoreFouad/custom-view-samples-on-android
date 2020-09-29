@@ -22,7 +22,9 @@ class ArcedArrowView @JvmOverloads
     private var containerColors = listOf(
         Color.parseColor("#006100"), Color.parseColor("#722f37"), Color.parseColor("#593E31"), Color.parseColor("#394249")
     )
+    private var colorTransparentBlack = "#80000000"
     private var arrowDrawable: Drawable? = null
+    private var backArrowDrawable: Drawable? = null
 
     private var containerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = containerColors[0] }
     private var arcPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -30,6 +32,7 @@ class ArcedArrowView @JvmOverloads
         style = Paint.Style.STROKE
         strokeWidth = 2f
     }
+    private var backArrowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.parseColor(colorTransparentBlack) }
     private var grayCirclePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.GRAY
         style = Paint.Style.STROKE
@@ -41,11 +44,30 @@ class ArcedArrowView @JvmOverloads
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+//        draw container with color
         drawContainer(canvas)
+
+//        draw round background for arrow
         drawArrowBg(canvas)
+
+//        draw arrow drawable itself on white background
         drawArrowImage(canvas)
+
+//        draw outlined gray circle indicating path to tread for arc
         drawGrayCircle(canvas)
+
+//        draw white arc itself
         drawArc(canvas)
+
+        if (containerColorIndex != 0 && angleCount != 1) { // if we're not on first screen (angle is 1 part, and color index of container is 0), draw back
+//            arrow
+//        draw back arrow background
+            drawBackArrowBackground(canvas)
+
+//        draw back arrow image
+            drawBackArrowImage(canvas)
+        }
+
     }
 
     private fun drawArc(canvas: Canvas?) {
@@ -94,6 +116,27 @@ class ArcedArrowView @JvmOverloads
         canvas?.restoreToCount(saveCount!!)
     }
 
+    private fun drawBackArrowBackground(canvas: Canvas?) {
+        canvas?.let {
+            it.drawRoundRect(
+                60f, 60f, 160f, 160f, 20f, 20f, backArrowPaint
+            )
+        }
+    }
+
+    private fun drawBackArrowImage(canvas: Canvas?) {
+        canvas?.let {
+            val saveCount = it.save()
+
+            it.translate(110f, 110f)
+            backArrowDrawable = resources.getDrawable(R.drawable.back_arrow, null)
+            backArrowDrawable?.setBounds(-35, -35, 35, 35)
+            backArrowDrawable?.draw(it)
+
+            it.restoreToCount(saveCount)
+        }
+    }
+
     private fun drawContainer(canvas: Canvas?) {
         containerPaint.color = containerColors[containerColorIndex]
         canvas?.drawRect(0f, 0f, width.toFloat(), height.toFloat(), containerPaint)
@@ -104,15 +147,16 @@ class ArcedArrowView @JvmOverloads
             MotionEvent.ACTION_DOWN -> {
                 val eventX = event.x
                 val eventY = event.y
-                var buttonRadius = (0.1f * width)
 
-                val buttonX = (width / 2).toFloat() - buttonRadius
-                val buttonY = (0.8f * height) - buttonRadius
-                val buttonHeight = buttonY + (buttonRadius.times(2))
-                val buttonWidth = buttonX + (buttonRadius.times(2))
+                if (eventX > 160f) { // next arrow is clicked
+                    var buttonRadius = (0.1f * width)
 
-                if (eventX > buttonX && eventX < (buttonWidth)) {
-                    if (eventY > buttonY && eventY < (buttonHeight)) {
+                    val buttonX = (width / 2).toFloat() - buttonRadius
+                    val buttonY = (0.8f * height) - buttonRadius
+                    val buttonHeight = buttonY + (buttonRadius.times(2))
+                    val buttonWidth = buttonX + (buttonRadius.times(2))
+
+                    if ((eventX > buttonX && eventX < (buttonWidth)) && (eventY > buttonY && eventY < (buttonHeight))) {
 
                         when (containerColorIndex) {
                             containerColors.size - 1 -> {
@@ -131,7 +175,18 @@ class ArcedArrowView @JvmOverloads
                         }
                         invalidate()
                     }
+
+                } else { // back arrow is clicked
+
+                    if ((eventX > 60f && eventX < 160f) && (eventY > 60f && eventY < 160f)) {
+                        containerColorIndex--
+                        angleCount--
+
+                        invalidate()
+                    }
+
                 }
+
 
             }
         }
