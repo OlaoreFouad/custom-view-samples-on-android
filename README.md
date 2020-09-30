@@ -43,3 +43,11 @@ You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-
 <img src="views/pacman.png" width="250"/>
 
 You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/ArcView.kt">here</a>
+
+## ArcedArrowView
+
+  Another arc exploit, this time I decided to go a bit harder. Built something similar to a stepper that uses an arc to measure progress. Everything on this page is a whole view - completely drawn manually, from the buttons to the arcs, images and circles. I started by drawing a global rect and giving it color, then I drew the circle at the bottom of the screen, and properly positioned the image there (also drawn), I then drew an outlined gray circle on the same path the arc is supposed to be. Then the arc was placed on top, with it's value (in degrees) changing on-click. I then drew the button at the top left with the image and the lightened background, this button reduces the arc's progress by one step. Just beautiful!
+
+<img src="views/arced_arrow.gif" width="250"/>
+
+You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/ArcedArrowView.kt">here</a>
