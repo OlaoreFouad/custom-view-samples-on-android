@@ -35,3 +35,11 @@ You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-
 <img src="views/repeated_rects.gif" width="250"/>
 
 You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/RepeatedRectView.kt">here</a>
+
+## PacmanView
+
+  I started learning how to work with arcs recently, and it's been amazing!. After a while, I replicated the Pacman character in this view. Love to see it!. I started by drawing the arc with an offset, then completed the revolution. The food/dots were carefully drawn spaces after the center of the pacman character.
+
+<img src="views/pacman.png" width="250"/>
+
+You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/ArcView.kt">here</a>
