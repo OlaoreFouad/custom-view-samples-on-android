@@ -1,0 +1,133 @@
+package dev.olaore.customviewsamplesonandroid.views
+
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
+import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
+import android.view.View
+import kotlin.math.sqrt
+
+class XboxView @JvmOverloads
+constructor(
+    private val ctx: Context,
+    private val attributeSet: AttributeSet? = null,
+    private val defStyleAttr: Int = 0,
+    private val defStyleRes: Int = 0
+) : View(ctx, attributeSet, defStyleAttr, defStyleRes) {
+
+    private val xboxColor: Int = Color.parseColor("#107C10")
+    private val xboxPathPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = xboxColor
+        style = Paint.Style.FILL
+        strokeWidth = 1f
+    }
+
+    private val boundingRectPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = Color.BLACK
+        style = Paint.Style.STROKE
+        strokeWidth = 1f
+    }
+    private val boundingRectSize: Float = 0.5F
+    private val boundingRectXOffsetPct: Float = 0.2F
+    private val boundingRectYOffsetPct: Float = 0.3F
+
+    private var globalRectWidth: Float = 0F
+
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+
+//        draw bounding rectangle
+        drawBoundingRect(canvas)
+
+//        draw bounding circle
+        drawBoundingCircle(canvas)
+
+//        draw top
+        drawTop(canvas)
+
+//        draw left
+
+//        draw right
+
+//        draw bottom
+    }
+
+    private fun drawBoundingRect(canvas: Canvas?) {
+        val xOffset = boundingRectXOffsetPct * width
+        val yOffset = boundingRectYOffsetPct * height
+
+        val rectWidth = (boundingRectSize - boundingRectXOffsetPct) * width * 2
+        val saveCount = canvas?.save()
+
+        canvas?.let {
+            it.translate(xOffset, yOffset)
+            it.drawRect(0f, 0f, rectWidth, rectWidth, boundingRectPaint)
+            it.restoreToCount(saveCount!!)
+        }
+
+        globalRectWidth = rectWidth
+
+    }
+
+    private fun drawBoundingCircle(canvas: Canvas?) {
+
+        val xOffset = boundingRectSize * width
+        val yOffset = boundingRectYOffsetPct * height + (globalRectWidth / 2f)
+
+        canvas?.let {
+            it.translate(
+                xOffset, yOffset
+            )
+            it.drawCircle(0f, 0f, globalRectWidth / 2f, boundingRectPaint)
+        }
+
+    }
+
+    private fun drawTop(canvas: Canvas?) {
+
+        val xOffset = boundingRectXOffsetPct * width
+        val yOffset = boundingRectYOffsetPct * height
+
+        canvas?.let {
+            it.translate(-globalRectWidth / 2, -globalRectWidth / 2)
+            it.translate(0.3f * globalRectWidth, 0f)
+            it.translate(0f, 0.045f * globalRectWidth)
+
+            val topPath = Path()
+
+            topPath.moveTo(0f, 0f)
+            topPath.rQuadTo(0.2f * globalRectWidth, -0.1f * globalRectWidth, 0.4f * globalRectWidth, 0f)
+            topPath.rQuadTo(-0.2f * globalRectWidth, 0.1f * globalRectWidth, -0.2f * globalRectWidth, 0.2f * globalRectWidth)
+            topPath.rQuadTo(0f, -0.1f * globalRectWidth, -0.2f * globalRectWidth, -0.2f * globalRectWidth)
+
+            it.drawPath(topPath, xboxPathPaint)
+
+
+        }
+
+    }
+
+//    private fun calculateHypotenuse() {
+//        val adjacent = globalRectWidth / 2
+//        val opposite = globalRectWidth / 2
+//
+//        val hypotenuseSquared = (adjacent * adjacent) + (opposite * opposite)
+//        val hypotenuse = sqrt(hypotenuseSquared.toDouble())
+//
+//        Log.d("XboxView", "Adjacent/Opposite is $adjacent")
+//        Log.d("XboxView", "Hypotenuse is $hypotenuse")
+//
+//    }
+
+    private fun toDP(value: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, value, ctx.resources.displayMetrics
+        )
+    }
+
+}
