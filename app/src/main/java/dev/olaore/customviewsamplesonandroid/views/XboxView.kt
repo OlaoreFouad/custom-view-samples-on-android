@@ -51,6 +51,7 @@ constructor(
         drawTop(canvas)
 
 //        draw left
+        drawLeft(canvas)
 
 //        draw right
 
@@ -94,9 +95,11 @@ constructor(
         val yOffset = boundingRectYOffsetPct * height
 
         canvas?.let {
+
+            val saveCount = it.save()
+
             it.translate(-globalRectWidth / 2, -globalRectWidth / 2)
-            it.translate(0.3f * globalRectWidth, 0f)
-            it.translate(0f, 0.045f * globalRectWidth)
+            it.translate(0.3f * globalRectWidth, 0.045f * globalRectWidth)
 
             val topPath = Path()
 
@@ -106,7 +109,27 @@ constructor(
             topPath.rQuadTo(0f, -0.1f * globalRectWidth, -0.2f * globalRectWidth, -0.2f * globalRectWidth)
 
             it.drawPath(topPath, xboxPathPaint)
+            it.restoreToCount(saveCount)
 
+
+        }
+
+    }
+
+    private fun drawLeft(canvas: Canvas?) {
+
+        canvas?.let {
+            it.translate(-globalRectWidth / 2, -globalRectWidth / 2)
+            it.translate(0.14f * globalRectWidth, 0.15f * globalRectWidth)
+
+            val leftPath = Path()
+
+            leftPath.moveTo(0f, 0f)
+            leftPath.rQuadTo(-0.3f * globalRectWidth, 0.35f * globalRectWidth, -0.012f * globalRectWidth, 0.68f * globalRectWidth)
+            leftPath.rQuadTo(0.1f * globalRectWidth, -0.4f * globalRectWidth, 0.25f * globalRectWidth, -0.5f * globalRectWidth)
+            leftPath.rQuadTo(-0.1f * globalRectWidth, -0.15f * globalRectWidth, -0.23f * globalRectWidth, -0.185f * globalRectWidth)
+
+            it.drawPath(leftPath, xboxPathPaint)
 
         }
 
