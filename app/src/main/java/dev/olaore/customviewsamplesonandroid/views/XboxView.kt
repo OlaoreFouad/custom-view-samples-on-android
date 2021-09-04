@@ -57,6 +57,7 @@ constructor(
         drawRight(canvas)
 
 //        draw bottom
+        drawBottom(canvas)
     }
 
     private fun drawBoundingRect(canvas: Canvas?) {
@@ -142,6 +143,7 @@ constructor(
 
     private fun drawRight(canvas: Canvas?) {
         canvas?.let {
+            val saveCount = it.save()
             it.translate(globalRectWidth / 2, -globalRectWidth / 2)
             it.translate(-0.14f * globalRectWidth, 0.15f * globalRectWidth)
 
@@ -153,21 +155,28 @@ constructor(
             rightPath.rQuadTo(0.1f * globalRectWidth, -0.15f * globalRectWidth, 0.23f * globalRectWidth, -0.185f * globalRectWidth)
 
             it.drawPath(rightPath, xboxPathPaint)
+            it.restoreToCount(saveCount)
 
         }
     }
 
-//    private fun calculateHypotenuse() {
-//        val adjacent = globalRectWidth / 2
-//        val opposite = globalRectWidth / 2
-//
-//        val hypotenuseSquared = (adjacent * adjacent) + (opposite * opposite)
-//        val hypotenuse = sqrt(hypotenuseSquared.toDouble())
-//
-//        Log.d("XboxView", "Adjacent/Opposite is $adjacent")
-//        Log.d("XboxView", "Hypotenuse is $hypotenuse")
-//
-//    }
+    private fun drawBottom(canvas: Canvas?) {
+        canvas?.let {
+
+            it.translate(-globalRectWidth / 2, globalRectWidth / 2)
+            it.translate(0.225f * globalRectWidth, -0.075f * globalRectWidth)
+
+            val bottomPath = Path()
+
+            bottomPath.moveTo(0f, 0f)
+            bottomPath.rQuadTo(0.3f * globalRectWidth, 0.2f * globalRectWidth, 0.575f * globalRectWidth, -0.005f * globalRectWidth)
+            bottomPath.rQuadTo(0.005f * globalRectWidth, -0.25f * globalRectWidth, -0.3f * globalRectWidth, -0.5f * globalRectWidth)
+            bottomPath.rQuadTo(-0.3f * globalRectWidth, 0.25f * globalRectWidth, -0.275f * globalRectWidth, 0.5f * globalRectWidth)
+
+            it.drawPath(bottomPath, xboxPathPaint)
+
+        }
+    }
 
     private fun toDP(value: Float): Float {
         return TypedValue.applyDimension(
