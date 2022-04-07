@@ -8,9 +8,11 @@
         <entry key="app/src/main/res/drawable/border_outline_grey.xml" value="0.4148148148148148" />
         <entry key="app/src/main/res/drawable/button_bg.xml" value="0.4148148148148148" />
         <entry key="app/src/main/res/drawable/button_bg_grey.xml" value="0.4148148148148148" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3351851851851852" />
         <entry key="app/src/main/res/layout/overlap_button.xml" value="0.6061343922859137" />
         <entry key="app/src/main/res/layout/overlap_button_2.xml" value="0.5096372036573789" />
         <entry key="app/src/main/res/layout/sample_overlap_button.xml" value="0.3351851851851852" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.3351851851851852" />
       </map>
     </option>
   </component>

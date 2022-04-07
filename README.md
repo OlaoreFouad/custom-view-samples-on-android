@@ -51,3 +51,11 @@ You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-
 <img src="views/arced_arrow.gif" width="250"/>
 
 You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/ArcedArrowView.kt">here</a>
+
+## XboxView
+
+This was an interesting one, I told myself I could do it after seeing how complicated it was and after a number of days cracking on with the xbox logo, I finally completed it by drawing a bunch of quadratic curves, although it's not perfect, I'd consider it a decent first shot!
+
+<img src="views/xbox.png" width="250"/>
+
+You can go through the code <a href="https://github.com/OlaoreFouad/custom-view-samples-on-android/blob/master/app/src/main/java/dev/olaore/customviewsamplesonandroid/views/XboxView.kt">here</a>
