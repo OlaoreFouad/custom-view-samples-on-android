@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.widget.Button
 import android.widget.SeekBar
+import dev.olaore.customviewsamplesonandroid.views.TouchPointsLinkView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +17,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val button = findViewById<Button>(R.id.reset_button)
+        val touchLink = findViewById<TouchPointsLinkView>(R.id.touch_link)
+
+        button.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                touchLink.clear()
+            }
+        })
     }
 }
 
